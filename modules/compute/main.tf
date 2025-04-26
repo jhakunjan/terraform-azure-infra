@@ -21,6 +21,12 @@ resource "azurerm_windows_virtual_machine" "windows_vms" {
   admin_password      = var.admin_password
   network_interface_ids = [azurerm_network_interface.nics[each.key].id]
 
+  os_disk {
+    name              = "${each.key}-osdisk"
+    caching           = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
@@ -40,10 +46,16 @@ resource "azurerm_linux_virtual_machine" "linux_vms" {
   disable_password_authentication = false
   network_interface_ids = [azurerm_network_interface.nics[each.key].id]
 
+  os_disk {
+    name              = "${each.key}-osdisk"
+    caching           = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "20_04-lts"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
 }

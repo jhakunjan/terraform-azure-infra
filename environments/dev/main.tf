@@ -20,16 +20,16 @@ module "compute" {
   admin_password      = var.admin_password
 
   vm_map = {
-    "dev-linux-vm"  = { os_type = "Linux", vm_size = "Standard_B2s" }
-    "dev-windows-vm" = { os_type = "Windows", vm_size = "Standard_B2ms" }
+    "dev-linux-vm"   = { os_type = "Linux", vm_size = "Standard_B1s" }
+    "dev-windows-vm" = { os_type = "Windows", vm_size = "Standard_B1s" }
   }
 }
 
 module "storage" {
-  source                 = "../../modules/storage"
-  resource_group_name    = var.resource_group_name
-  location               = var.location
-  storage_account_name   = "devstoragesa001"
-  container_name         = "tfstate"
+  source               = "../../modules/storage"
+  resource_group_name  = var.resource_group_name
+  location             = var.location
+  storage_account_name = "devstoragesa001"
+  container_name       = "tfstate"
 }
 

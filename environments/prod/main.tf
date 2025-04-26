@@ -20,8 +20,8 @@ module "compute" {
   admin_password      = var.admin_password
 
   vm_map = {
-    "prod-linux-vm"  = { os_type = "Linux", vm_size = "Standard_B2s" }
-    "prod-windows-vm" = { os_type = "Windows", vm_size = "Standard_B2ms" }
+    "prod-linux-vm"  = { os_type = "Linux", vm_size = "Standard_B1s" }
+    "prod-windows-vm" = { os_type = "Windows", vm_size = "Standard_B1s" }
   }
 }
 

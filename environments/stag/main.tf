@@ -20,8 +20,8 @@ module "compute" {
   admin_password      = var.admin_password
 
   vm_map = {
-    "stag-linux-vm"  = { os_type = "Linux", vm_size = "Standard_B2s" }
-    "stag-windows-vm" = { os_type = "Windows", vm_size = "Standard_B2ms" }
+    "stag-linux-vm"  = { os_type = "Linux", vm_size = "Standard_B1s" }
+    "stag-windows-vm" = { os_type = "Windows", vm_size = "Standard_B1s" }
   }
 }
 
