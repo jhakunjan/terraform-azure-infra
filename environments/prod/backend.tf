@@ -6,3 +6,9 @@ terraform {
     key                  = "prod/terraform.tfstate"
   }
 }
+
+provider "azurerm" {
+  features {}
+  subscription_id = "fb141b80-2b4d-4a51-a02b-ac95ac80ae0d"
+}
+  

@@ -11,13 +11,27 @@ module "network" {
   nsg_name = "dev-nsg"
 }
 
+module "keyvault" {
+  source              = "../../modules/keyvault"
+  environment         = var.environment
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  admin_password      = var.admin_password
+  admin_password_name = var.admin_password_name
+}
+
+data "azurerm_key_vault_secret" "admin_password" {
+  name         = var.admin_password_name
+  key_vault_id = module.keyvault.keyvault_id
+}
+
 module "compute" {
   source              = "../../modules/compute"
   resource_group_name = var.resource_group_name
   location            = var.location
   subnet_id           = module.network.subnet_ids["frontend"]
   admin_username      = var.admin_username
-  admin_password      = var.admin_password
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
 
   vm_map = {
     "dev-linux-vm"   = { os_type = "Linux", vm_size = "Standard_B1s" }
