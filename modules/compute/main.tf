@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "vm_public_ips" {
   name                         = "${each.key}-public-ip"
   location                     = var.location
   resource_group_name          = var.resource_group_name
-  allocation_method            = "Dynamic"  
+  allocation_method            = "Static"  
   sku                          = "Basic"    
   tags = {
     environment = "Dev"
@@ -89,8 +89,10 @@ resource "azurerm_linux_virtual_machine" "linux_vms" {
       "sudo curl -L \"https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "sudo chmod +x /usr/local/bin/docker-compose",
       "docker --version",
-      "docker-compose --version"
+      "docker-compose --version", 
+      "cd /home/${var.admin_username} && git clone https://github.com/jhakunjan/nodeapp.git",
+      "cd /home/${var.admin_username}/nodeapp && sudo docker-compose up -d"
     ]
   }
-  
 }
+
