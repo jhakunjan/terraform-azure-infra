@@ -4,3 +4,4 @@ variable "location" {}
 variable "resource_group_name" {}
 variable "subnets" { type = map(list(string)) }
 variable "nsg_name" {}
+
